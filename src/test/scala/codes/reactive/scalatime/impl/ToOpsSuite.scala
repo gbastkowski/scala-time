@@ -46,8 +46,8 @@ class ToAllOpsSuite extends fixture.FunSuite with Matchers {
 
   test("implicit conversion to IntOps from Int") { f ⇒
     import f._
-    val v: IntOps = 1
-    v.isInstanceOf[IntOps] shouldBe true
+    val v: PeriodFactory = 1
+    v.isInstanceOf[PeriodFactory] shouldBe true
   }
 
   test("implicit conversion to LongOps from Long") { f ⇒
@@ -111,7 +111,7 @@ class ToAllOpsSuite extends fixture.FunSuite with Matchers {
   }
 
   test("implicit conversion to TemporalQuery from a function (TemporalAccessor) => A") { f ⇒
-    import f._
+
     val v: TemporalQuery[_] = (a: TemporalAccessor) ⇒ a
     v.isInstanceOf[TemporalQuery[_]] shouldBe true
   }

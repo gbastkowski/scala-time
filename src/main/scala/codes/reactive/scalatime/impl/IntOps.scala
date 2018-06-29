@@ -18,19 +18,20 @@
 
 package codes.reactive.scalatime.impl
 
-import java.time.Period
+import java.time.Month._
+import java.time.{LocalDate, Month, Period, YearMonth}
 
 import scala.language.implicitConversions
 
-/** Enriches a [[scala.Long]] with methods for obtaining [[Period]] instances. */
-final case class IntOps(underlying: Int) extends AnyVal {
 
+/** Enriches a [[scala.Int]] with methods for obtaining [[Period]] instances. */
+final case class PeriodFactory(underlying: Int) extends AnyVal {
   /** Obtains a [[Period]] representing a number of days. */
   def day: Period = days
 
   /** Obtains a [[Period]] representing a number of days. */
   def days: Period = Period.ofDays(underlying) // TODO? Better way to overload day/days when used on literals.
-                                             // ie. both Period and Duration can be constructed from Int literals
+  // ie. both Period and Duration can be constructed from Int literals
 
   /** Obtains a [[Period]] representing a number of weeks. */
   def week: Period = weeks
@@ -49,9 +50,73 @@ final case class IntOps(underlying: Int) extends AnyVal {
 
   /** Obtains a [[Period]] representing a number of years. */
   def years: Period = Period.ofYears(underlying)
+}
 
+/** Enriches a [[scala.Int]] with methods for obtaining [[java.time.temporal.Temporal]] instances. */
+final case class YearMonthFactory(underlying: Int) extends AnyVal {
+  def jan:                YearMonth = toYearMonth(JANUARY)
+  def january:            YearMonth = jan
+  def jan(d: Int):        LocalDate = toLocalDate(jan, d)
+  def january(d: Int):    LocalDate = jan(d)
+
+  def feb:                YearMonth = toYearMonth(FEBRUARY)
+  def february:           YearMonth = feb
+  def feb(d: Int):        LocalDate = toLocalDate(feb, d)
+  def february(d: Int):   LocalDate = feb(d)
+
+  def mar:                YearMonth = toYearMonth(MARCH)
+  def march:              YearMonth = mar
+  def mar(d: Int):        LocalDate = toLocalDate(mar, d)
+  def march(d: Int):      LocalDate = mar(d)
+
+  def apr:                YearMonth = toYearMonth(APRIL)
+  def april:              YearMonth = apr
+  def apr(d: Int):        LocalDate = toLocalDate(apr, d)
+  def april(d: Int):      LocalDate = apr(d)
+
+  def may:                YearMonth = toYearMonth(MAY)
+  def may(d: Int):        LocalDate = toLocalDate(may, d)
+
+  def jun:                YearMonth = toYearMonth(JUNE)
+  def june:               YearMonth = jun
+  def jun(d: Int):        LocalDate = toLocalDate(jun, d)
+  def june(d: Int):       LocalDate = jun(d)
+
+  def jul:                YearMonth = toYearMonth(Month.JULY)
+  def july:               YearMonth = jul
+  def jul(d: Int):        LocalDate = toLocalDate(jul, d)
+  def july(d: Int):       LocalDate = jul(d)
+
+  def aug:                YearMonth = toYearMonth(AUGUST)
+  def august:             YearMonth = aug
+  def aug(d: Int):        LocalDate = toLocalDate(aug, d)
+  def august(d: Int):     LocalDate = aug(d)
+
+  def sep:                YearMonth = toYearMonth(SEPTEMBER)
+  def september:          YearMonth = sep
+  def sep(d: Int):        LocalDate = toLocalDate(sep, d)
+  def september(d: Int):  LocalDate = sep(d)
+
+  def oct:                YearMonth = toYearMonth(OCTOBER)
+  def october:            YearMonth = oct
+  def oct(d: Int):        LocalDate = toLocalDate(oct, d)
+  def october(d: Int):    LocalDate = oct(d)
+
+  def nov:                YearMonth = toYearMonth(NOVEMBER)
+  def november:           YearMonth = nov
+  def nov(d: Int):        LocalDate = toLocalDate(nov, d)
+  def november(d: Int):   LocalDate = nov(d)
+
+  def dec:                YearMonth = toYearMonth(DECEMBER)
+  def december:           YearMonth = dec
+  def dec(d: Int):        LocalDate = toLocalDate(dec, d)
+  def december(d: Int):   LocalDate = dec(d)
+
+  private[this] def toYearMonth(m: Month) = YearMonth.of(underlying, m)
+  private[this] def toLocalDate(ym: YearMonth, d: Int) = LocalDate.of(ym.getYear, ym.getMonth, d)
 }
 
 trait ToIntOps extends Any {
-  implicit final def toIntOpsFromLong(v: Int): IntOps = new IntOps(v)
+  implicit final def toPeriodFactory(v: Int): PeriodFactory = PeriodFactory(v)
+  implicit final def toYearMonthFactory(v: Int): YearMonthFactory = YearMonthFactory(v)
 }

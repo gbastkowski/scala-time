@@ -32,7 +32,7 @@ class ChronoLocalDateOpsSuite extends fixture.FunSuite with Matchers {
     ld %% lt shouldBe ld.underlying.atTime(lt)
   }
 
-  test("`>>` formats a ChronoLocalDate according to the specified formatter") { ld =>
+  test("`|>` formats a ChronoLocalDate according to the specified formatter") { ld =>
     ld |> ISO_LOCAL_DATE shouldBe ld.underlying.format(ISO_LOCAL_DATE)
   }
 

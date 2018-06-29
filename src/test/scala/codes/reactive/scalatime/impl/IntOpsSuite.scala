@@ -41,7 +41,7 @@ class IntOpsSuite extends fixture.FunSuite with Matchers {
 
   test("`years` obtains a period equal to the specified number of years")(_.years shouldBe Period.ofYears(10))
 
-  override type FixtureParam = IntOps
+  override type FixtureParam = PeriodFactory
 
-  override protected def withFixture(test: OneArgTest): Outcome = withFixture(test.toNoArgTest(new IntOps(10)))
+  override protected def withFixture(test: OneArgTest): Outcome = withFixture(test.toNoArgTest(PeriodFactory(10)))
 }
