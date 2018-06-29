@@ -19,7 +19,7 @@
 package codes.reactive.scalatime.impl
 
 import java.time.Month._
-import java.time.{LocalDate, Month, Period, YearMonth}
+import java.time._
 
 import scala.language.implicitConversions
 
@@ -116,7 +116,14 @@ final case class YearMonthFactory(underlying: Int) extends AnyVal {
   private[this] def toLocalDate(ym: YearMonth, d: Int) = LocalDate.of(ym.getYear, ym.getMonth, d)
 }
 
+final case class LocalDateTimeFactory(d: LocalDate) extends AnyVal {
+  def at(hour: Int, minute: Int): LocalDateTime = d.atTime(hour, minute)
+  def at(hour: Int, minute: Int, second: Int): LocalDateTime = d.atTime(hour, minute, second)
+}
+
 trait ToIntOps extends Any {
   implicit final def toPeriodFactory(v: Int): PeriodFactory = PeriodFactory(v)
   implicit final def toYearMonthFactory(v: Int): YearMonthFactory = YearMonthFactory(v)
+  implicit final def toLocalDateTimeFactory(v: LocalDate): LocalDateTimeFactory = LocalDateTimeFactory(v)
 }
+

@@ -18,7 +18,7 @@
 package codes.reactive.scalatime
 
 import java.time.Month.JANUARY
-import java.time.{Duration, LocalDate, Month, YearMonth}
+import java.time._
 import java.time.Month._
 
 import org.scalatest.{FunSpec, Matchers}
@@ -27,10 +27,12 @@ import org.scalatest.{FunSpec, Matchers}
   * Have a look here to see how to use this library.
   */
 class ExampleSuite extends FunSpec with Matchers {
-  describe("Duration") {
-    it("can be created with a minutes suffix") {
-      1.minutes shouldEqual Duration.ofMinutes(1)
-    }
+  describe("TemporalAmount") {
+    it("with a minutes suffix") { 1.minutes shouldEqual Duration.ofMinutes(1) }
+    it("with an hours suffix") { 1.hours shouldEqual Duration.ofHours(1) }
+    it("with a days suffix") { 1.days shouldEqual Period.ofDays(1) }
+    it("with a weeks suffix") { 1.weeks shouldEqual Period.ofWeeks(1) }
+    it("supports addition") { 1.days + 2.days shouldEqual Period.ofDays(3)}
   }
 
   describe("YearMonth") {
@@ -49,17 +51,22 @@ class ExampleSuite extends FunSpec with Matchers {
   }
 
   describe("LocalDate") {
-    it("supports JAN") { (2018 jan 1) shouldEqual LocalDate.of(2018, JANUARY,    1) }
-    it("supports FEB") { (2018 feb 1) shouldEqual LocalDate.of(2018, FEBRUARY,   1) }
-    it("supports MAR") { (2018 mar 1) shouldEqual LocalDate.of(2018, MARCH,      1) }
-    it("supports APR") { (2018 apr 1) shouldEqual LocalDate.of(2018, APRIL,      1) }
-    it("supports MAY") { (2018 may 1) shouldEqual LocalDate.of(2018, MAY,        1) }
-    it("supports JUN") { (2018 jun 1) shouldEqual LocalDate.of(2018, JUNE,       1) }
-    it("supports JUL") { (2018 jul 1) shouldEqual LocalDate.of(2018, JULY,       1) }
-    it("supports AUG") { (2018 aug 1) shouldEqual LocalDate.of(2018, AUGUST,     1) }
-    it("supports SEP") { (2018 sep 1) shouldEqual LocalDate.of(2018, SEPTEMBER,  1) }
-    it("supports OCT") { (2018 oct 1) shouldEqual LocalDate.of(2018, OCTOBER,    1) }
-    it("supports NOV") { (2018 nov 1) shouldEqual LocalDate.of(2018, NOVEMBER,   1) }
-    it("supports DEC") { (2018 dec 1) shouldEqual LocalDate.of(2018, DECEMBER,   1) }
+    it("creates 2018 jan 1") { (2018 jan 1) shouldEqual LocalDate.of(2018, JANUARY,    1) }
+    it("creates 2018 feb 1") { (2018 feb 1) shouldEqual LocalDate.of(2018, FEBRUARY,   1) }
+    it("creates 2018 mar 1") { (2018 mar 1) shouldEqual LocalDate.of(2018, MARCH,      1) }
+    it("creates 2018 apr 1") { (2018 apr 1) shouldEqual LocalDate.of(2018, APRIL,      1) }
+    it("creates 2018 may 1") { (2018 may 1) shouldEqual LocalDate.of(2018, MAY,        1) }
+    it("creates 2018 jun 1") { (2018 jun 1) shouldEqual LocalDate.of(2018, JUNE,       1) }
+    it("creates 2018 jul 1") { (2018 jul 1) shouldEqual LocalDate.of(2018, JULY,       1) }
+    it("creates 2018 aug 1") { (2018 aug 1) shouldEqual LocalDate.of(2018, AUGUST,     1) }
+    it("creates 2018 sep 1") { (2018 sep 1) shouldEqual LocalDate.of(2018, SEPTEMBER,  1) }
+    it("creates 2018 oct 1") { (2018 oct 1) shouldEqual LocalDate.of(2018, OCTOBER,    1) }
+    it("creates 2018 nov 1") { (2018 nov 1) shouldEqual LocalDate.of(2018, NOVEMBER,   1) }
+    it("creates 2018 dec 1") { (2018 dec 1) shouldEqual LocalDate.of(2018, DECEMBER,   1) }
+  }
+
+  describe("LocalDateTime") {
+    it("at 12:00") { (2018 jan 1 at (12, 0)) shouldEqual LocalDateTime.of(2018, JANUARY, 1, 12, 0) }
+    it("at 12:00:01") { (2018 jan 1 at (12, 0, 1)) shouldEqual LocalDateTime.of(2018, JANUARY, 1, 12, 0, 1) }
   }
 }
