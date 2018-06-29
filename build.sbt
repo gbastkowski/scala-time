@@ -25,7 +25,7 @@ lazy val scalaTime = project in file(".")
 
 version := "0.6.0-SNAPSHOT"
 
-organization := "codes.reactive"
+organization := "name.bastkowski"
 
 description := "Basic Scala wrapper for convenient use of JDK 1.8.0 time libraries."
 
@@ -41,7 +41,7 @@ apiURL := Some(url(s"http://oss.reactive.codes/scala-time/${version.value}"))
 
 scalaVersion := crossScalaVersions.value.head
 
-crossScalaVersions := Seq("2.12.2", "2.11.11", "2.10.6")
+crossScalaVersions := Seq("2.12.6", "2.11.11")
 
 libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.0.0" % Test)
 
