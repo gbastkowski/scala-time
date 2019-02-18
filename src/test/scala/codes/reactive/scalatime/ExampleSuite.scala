@@ -17,9 +17,8 @@
   ******************************************************************/
 package codes.reactive.scalatime
 
-import java.time.Month.JANUARY
+import java.time.Month.{JANUARY, _}
 import java.time._
-import java.time.Month._
 
 import org.scalatest.{FunSpec, Matchers}
 
